@@ -92,7 +92,7 @@ def create_bars(df, ax, y_pos, colors, left_gap):
 def compute_middle_sum(df, first_half, middle):
     try:
         return df[first_half].sum(axis=1) + df[middle] *.5
-    except ValueError:  # In case middle value is none
+    except KeyError:  # In case middle value is none
         return df[first_half].sum(axis=1)
 
 
@@ -167,7 +167,7 @@ def add_labels(df, ax, bars, rotation=0):
             bl = bar.get_xy()
             x = 0.5 *bar.get_width() +bl[0]
             y = 0.5 *bar.get_height() +bl[1]
-            ax.text(x, y, "{}".format(percentages[i, j]), ha='center', rotation=rotation)
+            ax.text(x, y, "{}".format(percentages[i][j]), ha='center', rotation=rotation)
 
 
 def draw_middle_line(normalise, longest_middle):
